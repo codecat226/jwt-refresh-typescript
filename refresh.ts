@@ -4,7 +4,7 @@ import express, {
   Response,
   NextFunction,
 } from "express";
-import jwt, { Secret, JwtPayload } from "jsonwebtoken";
+import jwt, { Secret } from "jsonwebtoken";
 import { dev } from "../config";
 // import the interface from authorise.ts
 import { CustomRequest, TokenInterface } from "./authorise";
@@ -42,11 +42,14 @@ export const createRefreshToken: RequestHandler = async (
       req.cookies[`${(decoded as TokenInterface).id}`] = "";
       res.clearCookie(`${(decoded as TokenInterface).id}`);
       //generate the NEW token:
-      const payload: JwtPayload = { id: (decoded as TokenInterface).id };
-      const newToken = jwt.sign(payload, String(privKey), {
-        //expiration needs to be LESS than the old token
-        expiresIn: "36s",
-      });
+      const newToken = jwt.sign(
+        { id: (decoded as TokenInterface).id },
+        String(privKey),
+        {
+          //expiration needs to be LESS than the old token
+          expiresIn: "36s",
+        }
+      );
       // send the NEW token inside NEW cookie
       res.cookie(String((decoded as TokenInterface).id), newToken, {
         path: "/",

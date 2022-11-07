@@ -10,5 +10,5 @@
 ### Remember in the project to import
 
 ```sh
-import jwt, { Secret, JwtPayload } from "jsonwebtoken";
+import jwt, { Secret } from "jsonwebtoken";
 ```
