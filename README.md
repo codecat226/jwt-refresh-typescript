@@ -1,6 +1,6 @@
 # jwt-refresh-typescript
 
-## jwt authorisation and refresh token with typescript
+## jwt authorisation and refresh token funtctions with typescript
 
 ### Packages to install (excluding general express, typescript setup):
 
